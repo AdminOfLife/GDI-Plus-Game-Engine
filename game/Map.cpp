@@ -1,11 +1,12 @@
 #include "stdafx.h"
 
-Map *map;
-Object* actor;
+Map *map = nullptr;
+Object* actor = nullptr;
 std::map<UINT, std::vector<Object*>> object;
 
 Map::Map()
 {
+	tileSet = nullptr;
 	tileBitmap = nullptr;
 	screen_x = 0;
 	screen_y = 0;
@@ -14,6 +15,8 @@ Map::Map()
 
 void Map::DrawTile()
 {
+	if (tileSet == nullptr)
+		return;
 	Gdiplus::Graphics tileGraphics(tileBitmap);
 	Gdiplus::SolidBrush whiteBrush(Gdiplus::Color(255, 255, 255));
 	tileGraphics.FillRectangle(&whiteBrush, 0, 0, size_x, size_y);
@@ -29,18 +32,30 @@ void Map::DrawTile()
 	}
 }
 
-void Map::Load(std::wstring filePath)
+void Map::Transition(UINT id)
 {
+	mapId = id;
+
+	DrawTile();
+
+}
+
+void Map::Load(std::string name)
+{
+	std::string spritePath("Map/");
+	spritePath += name;
+	std::string dataPath;
+	// 추후 비동기 io 로 변경
+	// 임시로 설정
 	size_x = 2048;
 	size_y = 1536;
 
-	tileSet = ResourceManager<Gdiplus::Image>::Load(L"resource/1.png");
+	tileSet = ResourceManager<Gdiplus::Image>::Load(L"map/1/tiles/");
 
 	if (tileBitmap != nullptr)
 		delete tileBitmap;
 
 	tileBitmap = new Gdiplus::Bitmap(size_x, size_y);
-	DrawTile();
 }
 
 void Map::Spawn(Object * _object)

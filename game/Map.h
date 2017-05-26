@@ -3,7 +3,8 @@ class Map
 public:
 	Map();
 	Gdiplus::Bitmap *tileBitmap;
-	void Load(std::wstring filePath);
+	void Transition(UINT id);
+	void Load(std::string name);
 	void Spawn(Object* _object);
 	void Update(std::chrono::milliseconds dt);
 	void Render();
@@ -28,6 +29,6 @@ private:
 
 extern Map *map;
 /*	actor를 기준으로 화면이 구성됩니다.
-actor를 변경하면 시점 변경이 가능합니다. */
+	actor를 변경하면 시점 변경이 가능합니다. */
 extern Object* actor;
 extern std::map<UINT, std::vector<Object*>> object;
