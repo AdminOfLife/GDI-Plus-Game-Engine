@@ -17,7 +17,6 @@
 #include <tchar.h>
 
 
-
 // TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.
 #pragma comment(lib, "winmm")
 
@@ -26,6 +25,9 @@
 #include <map>
 #include <unordered_map>
 #include <string>
+#include <sstream>
+#include <codecvt>
+#include <fstream>
 
 #include <functional>
 #include <chrono>

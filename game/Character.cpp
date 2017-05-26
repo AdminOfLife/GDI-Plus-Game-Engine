@@ -13,7 +13,8 @@ Character::Character()
 	this->frameIndex = 0;
 	this->speed = 10;
 	// 테스트를 위해 임시 설정
-	this->spriteSet = ResourceManager<Gdiplus::Image>::Load(L"resource/001-Fighter01.png");
+	// Actor class 따로 만들 것
+	this->spriteSet = ResourceManager<Gdiplus::Image>::Load(L"Resource/001-Fighter01.png");
 	this->InputComponent.AddBinding(VK_RIGHT, INPUT_PRESSED, new Function(&Character::MoveRight, this));
 	this->InputComponent.AddBinding(VK_LEFT, INPUT_PRESSED, new Function(&Character::MoveLeft, this));
 	this->InputComponent.AddBinding(VK_UP, INPUT_PRESSED, new Function(&Character::MoveUp, this));

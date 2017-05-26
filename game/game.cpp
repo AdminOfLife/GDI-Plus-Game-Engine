@@ -52,8 +52,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	}
 
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_GAME));
-	wstring wsWindowClass(szWindowClass);
-	wstring wsTitle(szTitle);
+	string wsWindowClass(szWindowClass);
+	string wsTitle(szTitle);
 	string sWindowClass;
 	string sTitle;
 	sWindowClass.assign(wsWindowClass.begin(), wsWindowClass.end());

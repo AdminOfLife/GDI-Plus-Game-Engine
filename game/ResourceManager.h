@@ -67,13 +67,13 @@ public:
 		return resource;
 	}
 
-	static bool Unload(const WCHAR &filename)
+	static bool Unload(const WCHAR *file)
 	{
 		// normalize it
 
 		// find the item to delete
-
-		std::unordered_map< std::string, T* >::iterator it = Map.find(filename);
+		WCHAR *filename = const_cast<WCHAR*>(file);
+		std::unordered_map< WCHAR*, T* >::iterator it = Map.find(filename);
 
 		if (it != Map.end())
 		{

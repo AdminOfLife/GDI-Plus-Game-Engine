@@ -12,7 +12,7 @@ Enemy::Enemy()
 	this->direction = 0;
 	this->frameIndex = 0;
 	this->speed = 10;
-	this->spriteSet = ResourceManager<Gdiplus::Image>::Load(L"resource/001-Fighter01.png");
+	this->spriteSet = ResourceManager<Gdiplus::Image>::Load(L"Resource/001-Fighter01.png");
 }
 
 Enemy::~Enemy()
