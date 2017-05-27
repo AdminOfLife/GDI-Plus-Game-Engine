@@ -88,12 +88,18 @@ void Map::Load(int id)
 	for (int i = 0; i < MAX_LAYER_LEVEL; i++)
 	{
 		tileData[i] = new int*[tile_x];
-		for (int j = 0; j < tile_x; j++)
+		for (int j = 0; j < tile_y; j++)
 		{
 			tileData[i][j] = new int[tile_y];
-			for (int k = 0; k < tile_y; k++)
+		}
+	}
+	for (int i = 0; i < MAX_LAYER_LEVEL; i++)
+	{
+		for (int j = 0; j < tile_y; j++)
+		{
+			for (int k = 0; k < tile_x; k++)
 			{
-				inFile >> tileData[i][j][k];
+				inFile >> tileData[i][k][j];
 			}
 		}
 	}
@@ -138,6 +144,9 @@ void Map::Spawn(Object * _object)
 
 void Map::Update(std::chrono::milliseconds dt)
 {
+	MapEvent(mapId);
+	actor->UpdateObject(dt);
+
 	std::vector<Object*> mapObject = object[mapId];
 	for (auto const &entity : mapObject)
 	{
@@ -172,10 +181,21 @@ void Map::Render()
 {
 	std::vector<Object*> mapObject = object[mapId];
 	scene->GetGraphics()->DrawImage(tileBitmap, 0, 0, screen_x, screen_y, scene->GetWidth(), scene->GetHeight(), Gdiplus::Unit::UnitPixel);
+	actor->RenderObject(screen_x, screen_y);
 	for (auto const &entity : mapObject)
 	{
 		entity->RenderObject(screen_x, screen_y);
 	}
+}
+
+int Map::GetWidth()
+{
+	return size_x;
+}
+
+int Map::GetHeight()
+{
+	return size_y;
 }
 
 Map::~Map()

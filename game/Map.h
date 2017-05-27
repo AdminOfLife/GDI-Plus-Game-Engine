@@ -9,6 +9,8 @@ public:
 	void Spawn(Object* _object);
 	void Update(std::chrono::milliseconds dt);
 	void Render();
+	int GetWidth();
+	int GetHeight();
 	~Map();
 private:
 	void Load(int id);
@@ -19,7 +21,7 @@ private:
 
 	/* 맵 데이터, 확정되면 struct로 묶기 */
 	/* 데이터 구조가 확립되면 바꿉니다. */
-	int mapId;
+	UINT mapId;
 	std::wstring mapName;
 	Gdiplus::Image *tileSet;
 	WCHAR tileSetPath[255];
@@ -42,3 +44,5 @@ extern Map *map;
 	actor를 변경하면 시점 변경이 가능합니다. */
 extern Character* actor;
 extern std::map<UINT, std::vector<Object*>> object;
+
+void MapEvent(UINT id);
